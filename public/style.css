@@ -1,0 +1,17 @@
+body {
+  font-family: sans-serif;
+  margin: 0;
+}
+
+h1 {
+  background-color: #0074d9;
+  color: #fff;
+  margin: 0;
+  padding: 1em;
+}
+
+p {
+  margin: 0.5em 0;
+  padding: 0.5em;
+  border: 1px solid #0074d9;
+}

@@ -1,0 +1,66 @@
+const express = require('express');
+const dns = require('dns');
+const fs = require('fs');
+
+const app = express();
+const port = process.env.PORT || 3000;
+const dnsNames = fs.readFileSync('dns_names.txt', 'utf-8').split('\n');
+const ipToLocationMap = JSON.parse(fs.readFileSync('ip_to_location_map.json', 'utf-8'));
+
+const path = require('path');
+
+// ...
+
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.get('/', async (req, res) => {
+  res.write('<html>');
+  res.write('<head><title>DNS Query Web App</title><link rel="stylesheet" href="style.css"><meta http-equiv="Refresh" content="5"></head>');
+  res.write('<body>');
+  res.write('<h1>DNS Query Web App</h1>');
+
+  try {
+    const results = await Promise.all(
+      dnsNames.map((name) => {
+        return new Promise((resolve, reject) => {
+          dns.lookup(name, (err, address, family) => {
+            if (err) {
+              reject(err);
+            } else {
+              const location = ipToLocationMap[address] || '';
+              resolve({ name, address, location });
+            }
+          });
+        });
+      })
+    );
+
+    results.forEach(({ name, address, location }) => {
+      res.write(`<p>${name} resolves to ${address} (${location})</p>`);
+    });
+  } catch (err) {
+    res.write(`<p>Error querying DNS names: ${err}</p>`);
+  }
+
+  res.write('</body>');
+  res.write('</html>');
+  res.end();
+});
+
+setInterval(() => {
+  console.log(`Querying DNS names: ${dnsNames}`);
+  dnsNames.forEach((name) => {
+    dns.lookup(name, (err, address, family) => {
+      if (err) {
+        console.log(`Error querying ${name}: ${err}`);
+      } else {
+        const location = ipToLocationMap[address] || '';
+        console.log(`${name} resolves to ${address} (${location})`);
+      }
+    });
+  });
+}, 30000);
+
+app.listen(port, () => {
+  console.log(`DNS Query Web App listening at http://localhost:${port}`);
+});

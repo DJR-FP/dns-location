@@ -1,0 +1,13 @@
+{
+  "name": "dns-query-webapp",
+  "version": "1.0.0",
+  "description": "A simple web application to query DNS names",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "dns": "^0.2.2",
+    "express": "^4.17.1"
+  }
+}
