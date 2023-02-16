@@ -5,8 +5,12 @@ const os = require('os');
 
 const app = express();
 const port = process.env.PORT || 3000;
-const dnsNames = fs.readFileSync('dns_names.txt', 'utf-8').split('\n');
-const ipToLocationMap = JSON.parse(fs.readFileSync('ip_to_location_map.json', 'utf-8'));
+//const dnsNames = fs.readFileSync('/config/dns_names.txt', 'utf-8').split('\n');
+//const ipToLocationMap = JSON.parse(fs.readFileSync('/config/ip_to_location_map.json', 'utf-8'));
+const dnsNames = fs.readFileSync('config/dns_names.txt', 'utf-8').split('\n');
+const ipToLocationMap = JSON.parse(fs.readFileSync('config/ip_to_location_map.json', 'utf-8'));
+
+
 
 const path = require('path');
 
