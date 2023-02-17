@@ -21,11 +21,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/', async (req, res) => {
   res.write('<html>');
 //  res.write('<div class="logo"></div>');
-  res.write('<head><title>DNS Query Web App</title><link rel="stylesheet" href="style.css"><meta http-equiv="Refresh" content="5"></head>');
+  res.write('<head><title>DNS Location FullProxy Ltd</title><link rel="stylesheet" href="style.css"><meta http-equiv="Refresh" content="5"></head>');
   res.write('<body>');
   res.write('<div class="logo"></div>');
-  res.write('<h1>DNS Query Web App</h1>');
-
+ // res.write('<h1>DNS Location</h1>');
+  res.write('<h1><span class="text">DNS Location Tracker</h1></span>');
   // Get the default DNS server IP and add it to the response/
   //changed this
   //const dnsServerIp = dns.getServers()[0];
