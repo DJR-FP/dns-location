@@ -20,8 +20,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', async (req, res) => {
   res.write('<html>');
+//  res.write('<div class="logo"></div>');
   res.write('<head><title>DNS Query Web App</title><link rel="stylesheet" href="style.css"><meta http-equiv="Refresh" content="5"></head>');
   res.write('<body>');
+  res.write('<div class="logo"></div>');
   res.write('<h1>DNS Query Web App</h1>');
 
   // Get the default DNS server IP and add it to the response/
@@ -39,7 +41,7 @@ app.get('/', async (req, res) => {
             if (err) {
               reject(err);
             } else {
-              const location = ipToLocationMap[address] || '';
+              const location = ipToLocationMap[address] || 'location unknown';
               resolve({ name, address, location });
             }
           });
@@ -66,7 +68,7 @@ setInterval(() => {
       if (err) {
         console.log(`Error querying ${name}: ${err}`);
       } else {
-        const location = ipToLocationMap[address] || 'unknown';
+        const location = ipToLocationMap[address] || 'location unknown';
         console.log(`${name} resolves to ${address} (${location})`);
       }
     });

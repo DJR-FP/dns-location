@@ -3,6 +3,11 @@ body {
   margin: 0;
 }
 
+.logo {
+  background-image: url('/logo.png');
+  /* add other CSS properties for your logo */
+}
+
 h1 {
   background-color: #0074d9;
   color: #fff;
@@ -15,3 +20,4 @@ p {
   padding: 0.5em;
   border: 1px solid #0074d9;
 }
+
