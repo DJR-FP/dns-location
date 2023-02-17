@@ -8,7 +8,7 @@ WORKDIR /app
 RUN mkdir -p ./conf
 
 #copy local config file
-COPY config ./config
+#COPY config ./config
 #COPY dns_names.txt /conf
 
 # Copy package.json and package-lock.json

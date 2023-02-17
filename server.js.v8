@@ -24,11 +24,8 @@ app.get('/', async (req, res) => {
   res.write('<body>');
   res.write('<h1>DNS Query Web App</h1>');
 
-  // Get the default DNS server IP and add it to the response/
-  //changed this
-  //const dnsServerIp = dns.getServers()[0];
- //
- const dnsServerIp = fs.readFileSync('config/dns_server.txt', 'utf-8').trim();
+  // Get the default DNS server IP and add it to the response
+  const dnsServerIp = dns.getServers()[0];
   res.write(`<p>Using DNS server: ${dnsServerIp}</p>`);
 
   try {
@@ -66,7 +63,7 @@ setInterval(() => {
       if (err) {
         console.log(`Error querying ${name}: ${err}`);
       } else {
-        const location = ipToLocationMap[address] || 'unknown';
+        const location = ipToLocationMap[address] || '';
         console.log(`${name} resolves to ${address} (${location})`);
       }
     });
