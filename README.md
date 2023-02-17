@@ -1,8 +1,9 @@
 # dns-location
 
 
-testing
+#testing
 docker run -p 3000:3000 -v ./config:/app/config my-appv9
+
 docker build -t my-appv9 .
  
 Edit with youre own details
