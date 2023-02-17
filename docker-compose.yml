@@ -1,0 +1,14 @@
+version: '3.5'
+
+services:
+  dns-location:
+    restart: always
+    image: donamato/dns-loco10
+    ports:
+    - "3000:3000"
+    volumes:
+    - ./config:/app/config # Change volume path
+networks:
+  default:
+    external:
+       name: djlabs_10
