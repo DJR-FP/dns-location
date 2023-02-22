@@ -26,5 +26,7 @@ example json ip_to_location_map.json
 }
 
 Logging
+
 docker exec <container_name> cat /app/dns_query_log.txt
+
 docker exec <container_name> cat /app/dns_query_log.txt > dns_query_log.txt
