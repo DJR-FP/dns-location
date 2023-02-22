@@ -5,8 +5,8 @@ const os = require('os');
 
 const app = express();
 const port = process.env.PORT || 3000;
-const logFilePath = 'dns_query_log.txt';
-fs.writeFileSync(logFilePath, '');
+//const dnsNames = fs.readFileSync('/config/dns_names.txt', 'utf-8').split('\n');
+//const ipToLocationMap = JSON.parse(fs.readFileSync('/config/ip_to_location_map.json', 'utf-8'));
 const dnsNames = fs.readFileSync('config/dns_names.txt', 'utf-8').split('\n');
 const ipToLocationMap = JSON.parse(fs.readFileSync('config/ip_to_location_map.json', 'utf-8'));
 
@@ -67,16 +67,13 @@ setInterval(() => {
   console.log(`Querying DNS names: ${dnsNames}`);
   dnsNames.forEach((name) => {
     dns.lookup(name, { all: true, family: 4, server: dnsServerIp }, (err, addresses) => {
-  if (err) {
-    console.log(`Error querying ${name}: ${err}`);
-  } else {
-    const location = ipToLocationMap[addresses[0].address] || 'location unknown';
-    const logMessage = `${new Date().toISOString()} - ${name} resolves to ${addresses[0].address} (${location})\n`;
-    console.log(logMessage);
-    fs.appendFileSync(logFilePath, logMessage);
-  }
-});
-
+      if (err) {
+        console.log(`Error querying ${name}: ${err}`);
+      } else {
+        const location = ipToLocationMap[addresses[0].address] || 'location unknown';
+        console.log(`${name} resolves to ${addresses[0].address} (${location})`);
+      }
+    });
   });
 }, 30000);
 
