@@ -14,7 +14,7 @@ const ipToLocationMap = JSON.parse(fs.readFileSync('config/ip_to_location_map.js
 
 const path = require('path');
 
-// ...
+//updated error checks ...
 
 app.use(express.static(path.join(__dirname, 'public')));
 
