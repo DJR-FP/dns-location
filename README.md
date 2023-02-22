@@ -24,3 +24,7 @@ example json ip_to_location_map.json
   "151.101.0.81": "Data center 1",
   "151.101.192.81": "Data center 2"
 }
+
+Logging
+docker exec <container_name> cat /app/dns_query_log.txt
+docker exec <container_name> cat /app/dns_query_log.txt > dns_query_log.txt
