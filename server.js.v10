@@ -61,22 +61,20 @@ app.get('/', async (req, res) => {
   res.end();
 });
 
-const dnsServerIp = fs.readFileSync('config/dns_server.txt', 'utf-8').trim();
-
 setInterval(() => {
   console.log(`Querying DNS names: ${dnsNames}`);
   dnsNames.forEach((name) => {
-    dns.lookup(name, { all: true, family: 4, server: dnsServerIp }, (err, addresses) => {
+    dns.lookup(name, (err, address, family) => {
+//     dns.lookup(name, { all: true, family: 4, server: dnsServerIp }, (err, addresses) => {
       if (err) {
         console.log(`Error querying ${name}: ${err}`);
       } else {
-        const location = ipToLocationMap[addresses[0].address] || 'location unknown';
-        console.log(`${name} resolves to ${addresses[0].address} (${location})`);
+        const location = ipToLocationMap[address] || 'location unknown';
+        console.log(`${name} resolves to ${address} (${location})`);
       }
     });
   });
 }, 30000);
-
 
 app.listen(port, () => {
   console.log(`DNS Query Web App listening at http://localhost:${port}`);
