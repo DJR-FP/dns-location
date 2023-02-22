@@ -2,3 +2,7 @@ www.fullproxy.com
 bbc.co.uk
 heartsfc.co.uk
 testlab.com
+app1.testlab.com
+app2.testlab.com
+app4.testlab.com
+pingotestlab.com
