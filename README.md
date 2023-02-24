@@ -1,5 +1,6 @@
 # dns-location
 
+#UPDATED NEEDED for latest version with dns fix and error checking# 
 
 #testing docker run -p 3000:3000 -v ./config:/app/config my-appv9
 
@@ -30,3 +31,5 @@ Logging
 docker exec <container_name> cat /app/dns_query_log.txt
 
 docker exec <container_name> cat /app/dns_query_log.txt > dns_query_log.txt
+
+--env DNS_SERVER=192.168.50.148 
